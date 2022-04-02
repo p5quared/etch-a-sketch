@@ -1,0 +1,45 @@
+* {
+}
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: lightGray;
+}
+.grid {
+    height: 500px;
+    width: 500px;
+    background-color: black;
+    display: flex;
+    flex-wrap: wrap;
+}
+.tile-off,
+.tile-on {
+    outline: 1px solid white;
+}
+.tile-off {
+    background-color: inherit;
+}
+
+.tile-on {
+    background-color: white;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.reset-button {
+    background-color: red;
+}
+
+.change-button {
+    background-color: forestGreen;
+}
+
+.reset-button,
+.change-button{
+    font-weight: bold;
+    font-size: 14pt;
+}

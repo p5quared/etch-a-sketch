@@ -8,17 +8,64 @@ container.appendChild(h3) //add to parent
 */
 
 const body = document.querySelector('body');
-//body.style.display('flex')
-const header_text = document.createElement('h1');
+const grid = document.querySelector('.grid');
+const content = document.querySelector('.content');
 
-header_text.classList.add('header');
-header_text.textContent = "Etch-a-Sketch with JS only!"
-header_text.style.backgroundColor = 'grey'
-body.appendChild(header)
+let size = 100;
+generate_tiles(size);
+
+function generate_tiles(size){
+    const side = size_calc(size);
+    for (let i = 0; i < size; i++) {
+        const tile = document.createElement('tile');
+        tile.classList.add('tile-off');
+        tile.style.width = side;
+        tile.style.height = side;
+        tile.addEventListener('mouseover', () =>{
+            tile.classList.toggle('tile-off');
+            tile.classList.toggle('tile-on');
+        });
+        grid.appendChild(tile);
+    }
+}
+
+function grid_reset(){
+    grid.innerHTML = '';
+}
+
+function grid_changeSize(){
+    grid_reset();
+    const newSize = window.prompt("Enter new size: ");
+    alert("New size: " + newSize);
+    size = newSize
+    generate_tiles(size);
+}
+
+function size_calc(size) {
+    const grid_wall = 500;
+    const num_tiles = size;
+    const tiles_per_wall = Math.sqrt(num_tiles);
+    const true_length = (grid_wall / tiles_per_wall).toString();
+    return true_length.concat('px');
+}
 
 
+// buttons
+const button_reset = document.createElement('button');
+button_reset.classList.add('reset-button');
+button_reset.textContent="Reset Grid";
+button_reset.addEventListener('click', () => {
+    grid_reset();
+    generate_tiles(size);
+});
+content.append(button_reset);
 
-body.style.display = 'flex';
-body.style.flexDirection = 'column';
-body.style.alignItems = 'center'
+const button_changeSize = document.createElement('button');
+button_changeSize.classList.add('change-button');
+button_changeSize.textContent="Change Grid Size";
+button_changeSize.addEventListener('click', () => {
+    grid_changeSize();
+});
+content.append(button_changeSize);
+
 
